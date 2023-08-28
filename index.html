@@ -1,0 +1,112 @@
+<!--
+
+Example of using three.js to display a hologram of a Mandelbulb.
+
+Author: Zack Traczyk (https://zacktraczyk.com)
+Copyright: MIT License -> http://opensource.org/licenses/MIT
+
+This example was adapted from the following sources:
+  - ThreeJS version: https (Mandelbulb)://www.taoeffect.com/other/fractals/mandelbulb/
+  - Original WebGL version (3dmandelbrot): https://code.google.com/archive/p/webgl-mandelbulb/source
+
+Acreditations at end of file.
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
+
+<!-- 
+
+Example of using three.js to fly through a Mandelbulb.
+
+Author: Greg Slepak (https://twitter.com/taoeffect)
+Copyright: MIT License -> http://opensource.org/licenses/mit-license.php
+
+Frameworks used (at least):
+- jQuery
+- RequireJS
+- AngularJS
+- three.js
+- Codemirror
+- Twitter Bootstrap 3.0.0-RC2
+
+With special thanks to:
+- eiffie
+- Syntopia
+- knighty
+- cKleinhuis
+
+And everyone else on the fractalforums!
+http://www.fractalforums.com/mandelbulb-implementation/webgl-mandelbulb-with-three-js-flythrough-controls-(optimizations-wanted)
+-->
+
+<!--
+ 3dmandelbrot was put together by:
+ Michael Jewell <michael.jewell@maine.edu>,  
+ Jesse Altman <jesse.altman@maine.edu>,
+ Shane Christy <shane.christy@maine.edu>,
+ Kayla Christina Artinyan <kayla.artinyan@maine.edu> from the universtiy of southern maine for Bruce Macleod's Interactive Graphics course
+ 
+ The origin of our mandelbulb equations:
+ * Mandelbulb.pbk
+ * Last update: 14 December 2009
+ *
+ * Changelog:
+ *		1.0		- Initial release
+ *		1.0.1	- Fixed a missing asymmetry thanks to Chris King (http://www.dhushara.com)
+ *				- Refinements in the colouring
+ *      1.0.2   - Added radiolaria option for a funky hair-like effect
+ * 				- Incorporated the scalar derivative method as described here:
+ *			    - http://www.fractalforums.com/mandelbulb-implementation/realtime-renderingoptimisations/
+ *		1.0.3	- Created a quick version of the script as using a boolean flag to determine
+ *				  which distance estimation method created long compilation times.
+ * 		1.0.4 	- Fixed issue with older graphic cards and the specular highlights
+ *
+ *
+ * Copyright (c) 2009 Tom Beddard
+ * http://www.subblue.com
+ *
+ * For more Flash and PixelBender based generative graphics experiments see:
+ * http://www.subblue.com/blog
+ *
+ * Licensed under the MIT License:
+ * http://www.opensource.org/licenses/mit-license.php
+ *
+ *
+ * Credits and references
+ * ======================
+ * For the story behind the 3D Mandelbrot see the following page:
+ * http://www.skytopia.com/project/fractal/mandelbulb.html
+ *
+ * The original forum disussion with many implementation details can be found here:
+ * http://www.fractalforums.com/3d-fractal-generation/true-3d-mandlebrot-type-fractal/
+ *
+ * This implementation references the 4D Quaternion GPU Raytracer by Keenan Crane:
+ * http://www.devmaster.net/forums/showthread.php?t=4448
+ *
+ * and the NVIDIA CUDA/OptiX implementation by cbuchner1:
+ * http://forums.nvidia.com/index.php?showtopic=150985
+ *
+ *  -- noise provided by --
+ *The following is noise calculations are provided from
+ * Original noise Author: Stefan Gustavson ITN-LiTH (stegu@itn.liu.se) 2004-12-05
+ * Simplex indexing functions by Bill Licea-Kane, ATI
+ *
+ * You may use, modify and redistribute this code free of charge,
+ * provided that the author's names and this notice appear intact.
+ *
+ * The code was hosted at http://www.pcprogramming.com/NoiseCube.html
+ */
+
+ /* -->

@@ -1,0 +1,40 @@
+body {
+  margin: 0px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#debug {
+  color: black;
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+  z-index: 100;
+  display: block;
+  width: 30%;
+  padding: 10px;
+}
+
+#github {
+  position: fixed;
+  padding: 10px;
+  bottom: 5px;
+  left: 5px;
+  background-color: black;
+}
+
+a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  color: pink;
+}
