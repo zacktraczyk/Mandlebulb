@@ -2,16 +2,19 @@ import { fragmentShader, vertexShader } from "./blub-shader";
 import { World } from "./world";
 import * as THREE from "three";
 
+import "./style.css";
+
 let world: World;
+let mesh: THREE.Mesh;
+
+let uniforms = {
+  time: { type: "f", value: 1.0 },
+  modelViewProjectMatrixInverse: { type: "m4", value: [] },
+  // , resolution: { type: "v2", value: new THREE.Vector2() }
+};
 
 function Init() {
   world = new World();
-
-  var uniforms = {
-    time: { type: "f", value: 1.0 },
-    modelViewProjectMatrixInverse: { type: "m4", value: [] },
-    // , resolution: { type: "v2", value: new THREE.Vector2() }
-  };
 
   let material = new THREE.ShaderMaterial({
     uniforms: uniforms,
@@ -22,7 +25,7 @@ function Init() {
     // side: THREE.DoubleSide
   });
 
-  var mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+  mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
 
   // use a billboard instead?
   mesh.frustumCulled = false;
@@ -36,7 +39,19 @@ function Init() {
   });
 }
 
+let modelViewProjectMatrixInverse = new THREE.Matrix4();
+
 function Animate() {
+  uniforms.time.value += 0.05;
+  modelViewProjectMatrixInverse
+    .multiplyMatrices(
+      world.camera.projectionMatrix,
+      world.camera.matrixWorldInverse
+    )
+    .multiply(mesh.matrixWorld);
+  modelViewProjectMatrixInverse.invert();
+  uniforms.modelViewProjectMatrixInverse.value = modelViewProjectMatrixInverse;
+
   world.update();
 }
 
