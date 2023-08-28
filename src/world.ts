@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { FlyControls } from "three/addons/controls/FlyControls.js";
+import { TrackballControls } from "three/addons/controls/TrackballControls.js";
 
 //
 // Fish Tank
@@ -8,15 +8,8 @@ import { FlyControls } from "three/addons/controls/FlyControls.js";
 export class World {
   public scene: THREE.Scene;
   public camera: THREE.PerspectiveCamera;
-  public cameraControls: FlyControls;
+  public cameraControls: TrackballControls;
   public renderer: THREE.WebGLRenderer;
-
-  // public mouseX: number;
-  // public mouseY: number;
-  // public lat: number;
-  // public lon: number;
-  // public phy: number;
-  // public theta: number;
 
   constructor() {
     // Initalize Scene
@@ -24,12 +17,6 @@ export class World {
 
     // Camera
     this.camera = this.initCamera();
-
-    // Fog
-    // this.initFog();
-
-    // Background Color
-    // this.scene.background = new THREE.Color(0xffffff);
 
     // Renderer init
     this.renderer = this.initRenderer();
@@ -58,18 +45,6 @@ export class World {
   }
 
   //
-  // Initialize Scene Fog
-  //
-  private initFog(): void {
-    const near = 4;
-    const far = 10;
-    // const color = 0x87ace8; // blue
-    const color = 0x00; // blue
-    // this.scene.background = new THREE.Color(color);
-    this.scene.fog = new THREE.Fog(color, near, far);
-  }
-
-  //
   // Initialize Renderer
   //
   private initRenderer(): THREE.WebGLRenderer {
@@ -85,12 +60,13 @@ export class World {
   //
   // Initialize Camera Controls
   //
-  private initCameraControls(): FlyControls {
-    const cc = new FlyControls(this.camera, this.renderer.domElement);
-    cc.movementSpeed = 0.7;
-    cc.rollSpeed = Math.PI / 24;
-    cc.autoForward = false;
-    cc.dragToLook = true;
+  private initCameraControls(): TrackballControls {
+    const cc = new TrackballControls(this.camera, this.renderer.domElement);
+    cc.target.set(0, 0, 0);
+
+    cc.rotateSpeed = 1.0;
+    cc.zoomSpeed = 1.2;
+    cc.panSpeed = 0.8;
 
     return cc;
   }
@@ -109,7 +85,7 @@ export class World {
   public onWindowResize(): void {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
-    // this.cameraControls.handleResize(); // Camera Trackball
+    this.cameraControls.handleResize(); // Camera Trackball
 
     this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
